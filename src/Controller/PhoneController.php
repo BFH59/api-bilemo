@@ -13,7 +13,7 @@ class PhoneController extends AbstractFOSRestController
 {
     /**
      * @Rest\Get(
-     *     path = "/phones/{id}",
+     *     path = "/api/phones/{id}",
      *     name = "app_phone_show",
      *     requirements={"id"="\d+"}
      * )
@@ -28,7 +28,7 @@ class PhoneController extends AbstractFOSRestController
 
     /**
      * @Rest\Get(
-     *     path = "/phones",
+     *     path = "/api/phones",
      *     name = "app_phone_list"
      * )
      * @Rest\View()
