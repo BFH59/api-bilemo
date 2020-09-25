@@ -10,9 +10,13 @@ fos_rest:
       serialize_null:  true
     body_converter:
       enabled:  true
+      validate: true
+      validation_errors_argument: violations
+    exception:
+      enabled: true
     format_listener:
       rules:
-        - { path: ^/, prefer_extension: true, fallback_format: json, priorities: [ json, html ] }
+        - { path: ^/, prefer_extension: true, fallback_format: 'json', priorities: [ 'json', 'html' ] }
 
 
 #    param_fetcher_listener:  true
