@@ -12,11 +12,28 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method User[]    findAll()
  * @method User[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends AbstractRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
+    }
+
+    public function search($client ,$term, $order = 'asc', $limit = 10, $offset = 0, $page = 0)
+    {
+        $qb = $this
+            ->createQueryBuilder('u')
+            ->select('u')
+            ->where('u.client = :client')
+            ->setParameter('client', $client->getId())
+            ->orderBy('u.id', $order);
+
+        if($term){
+            $qb->where('u.id LIKE ?1')
+                ->setParameter(1, '%'.$term.'%');
+        }
+        return $this->paginate($qb, $limit, $offset, $page);
+
     }
 
     // /**

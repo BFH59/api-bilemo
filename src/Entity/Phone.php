@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use App\Repository\PhoneRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as Serializer;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 
 /**
  * @ORM\Entity(repositoryClass=PhoneRepository::class)
+ *
+ * @ExclusionPolicy("all")
  */
 class Phone
 {
@@ -14,21 +18,29 @@ class Phone
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Serializer\Expose()
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Serializer\Expose()
      */
     private $description;
 
     /**
      * @ORM\Column(type="float")
+     *
+     * @Serializer\Expose()
      */
     private $price;
 
