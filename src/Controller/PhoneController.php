@@ -6,8 +6,10 @@ namespace App\Controller;
 
 use App\Entity\Phone;
 use App\Repository\PhoneRepository;
+use App\Representation\Phones;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Request\ParamFetcherInterface;
 
 class PhoneController extends AbstractFOSRestController
 {
@@ -31,14 +33,51 @@ class PhoneController extends AbstractFOSRestController
      *     path = "/api/phones",
      *     name = "app_phone_list"
      * )
+     * @Rest\QueryParam(
+     *     name="keyword",
+     *     requirements="[a-zA-Z0-9]",
+     *     nullable=true,
+     *     description="Mot clé à rechercher"
+     * )
+     * @Rest\QueryParam(
+     *     name="order",
+     *     requirements="asc|desc",
+     *     description="asc",
+     *     description="Trier par asc ou desc"
+     * )
+     * @Rest\QueryParam(
+     *     name="limit",
+     *     requirements="\d+",
+     *     default="10",
+     *     description="Nombre maximum de téléphones par page"
+     * )
+     * @Rest\QueryParam(
+     *     name="offset",
+     *     requirements="\d+",
+     *     default="0",
+     *     description="Pagination offset"
+     * )
+     * @Rest\QueryParam(
+     *     name="page",
+     *     requirements="\d+",
+     *     default="1",
+     *     description="Page à consulter"
+     * )
      * @Rest\View()
+     * @param ParamFetcherInterface $paramFetcher
      * @param PhoneRepository $phoneRepository
-     * @return Phone[]
+     * @return Phones
      */
-    public function listAction(PhoneRepository $phoneRepository)
+    public function listAction(ParamFetcherInterface $paramFetcher, PhoneRepository $phoneRepository)
     {
-        $phone = $phoneRepository->findAll();
+        $pager = $phoneRepository->search(
+            $paramFetcher->get('keyword'),
+            $paramFetcher->get('order'),
+            $paramFetcher->get('limit'),
+            $paramFetcher->get('offset'),
+            $paramFetcher->get('page')
+        );
 
-        return $phone;
+        return new Phones($pager);
     }
 }
