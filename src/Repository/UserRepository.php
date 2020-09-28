@@ -25,7 +25,7 @@ class UserRepository extends AbstractRepository
             ->createQueryBuilder('u')
             ->select('u')
             ->where('u.client = :client')
-            ->setParameter('client', $client->getId())
+            ->setParameter('client', $client)
             ->orderBy('u.id', $order);
 
         if($term){

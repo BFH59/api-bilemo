@@ -43,7 +43,7 @@ class User
     /**
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\NotBlank(groups={"Create", "Update"}, message="Ce champs ne doit pas être vide")
-     * @Assert\Email()
+     * @Assert\Email(groups={"Create", "Update"}, message="L'adresse email n est pas valide")
      * @Serializer\Expose()
      *
      */
