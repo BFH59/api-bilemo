@@ -10,9 +10,13 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class UserVoter extends Voter
 {
 
+    const VIEW = 'user_view';
+    const UPDATE = 'user_update';
+    const DELETE = 'user_delete';
+
     protected function supports($attribute, $subject)
     {
-        return in_array($attribute, ['user_delete', 'user_update', 'user_view'])
+        return in_array($attribute, [self::VIEW, self::UPDATE, self::DELETE])
             && $subject instanceof User;
     }
 
@@ -24,9 +28,9 @@ class UserVoter extends Voter
         }
 
         switch ($attribute) {
-            case 'user_delete':
-            case 'user_update':
-            case 'user_view':
+            case self::DELETE:
+            case self::UPDATE:
+            case self::VIEW:
                 return $this->isUserOwner($subject, $client);
                 break;
         }
