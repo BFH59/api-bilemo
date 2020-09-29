@@ -16,10 +16,23 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Validator\ConstraintViolationList;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
 
 class UserController extends AbstractFOSRestController
 {
     /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Récupére la liste des utilisateurs",
+     *     @OA\JsonContent(
+     *     type="array",
+     *     @OA\Items(ref=@Model(type=User::class))
+     *      )
+     *)
+     *
+     * @Security(name="Bearer")
      * @Rest\Get(
      *     path = "/api/users",
      *     name = "app_user_list"
@@ -75,6 +88,16 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Récupére le détail d'un utilisateur",
+     *     @OA\JsonContent(
+     *     type="array",
+     *     @OA\Items(ref=@Model(type=User::class))
+     *      )
+     *)
+     *
+     * @Security(name="Bearer")
      * @Rest\Get(
      *     path = "/api/users/{id}",
      *     name = "app_user_show",
@@ -91,6 +114,15 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     * @OA\Response(
+     *     response=201,
+     *     description="Permet de créer un utilisateur rattaché au client connecté. Les champs nom, email et phone sont obligatoires",
+     *     @OA\JsonContent(
+     *     type="array",
+     *     @OA\Items(ref=@Model(type=User::class))
+     *      )
+     *)
+     * @Security(name="Bearer")
      * @Rest\Post(
      *     path="/api/users",
      *     name="app_user_create"
@@ -120,6 +152,11 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Permet de modifier un utilisateur rattaché au client connecté. Les champs nom, email et phone sont obligatoires",
+     *)
+     * @Security(name="Bearer")
      * @Rest\Put(
      *     path="/api/users/{id}",
      *     name="app_user_update",
@@ -155,6 +192,12 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     *
+     * @OA\Response(
+     *     response=200,
+     *     description="Permet de supprimer un utilisateur rattaché au client connecté.",
+     *)
+     * @Security(name="Bearer")
      * @Rest\Delete(
      *     path="/api/users/{id}",
      *     name="app_user_delete",

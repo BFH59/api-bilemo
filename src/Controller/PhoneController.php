@@ -10,10 +10,23 @@ use App\Representation\Phones;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Nelmio\ApiDocBundle\Annotation\Security;
+use OpenApi\Annotations as OA;
 
 class PhoneController extends AbstractFOSRestController
 {
     /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Récupére les détails d'un téléphone",
+     *     @OA\JsonContent(
+     *     type="array",
+     *     @OA\Items(ref=@Model(type=Phone::class))
+     *      )
+     *)
+     *
+     * @Security(name="Bearer")
      * @Rest\Get(
      *     path = "/api/phones/{id}",
      *     name = "app_phone_show",
@@ -29,6 +42,16 @@ class PhoneController extends AbstractFOSRestController
     }
 
     /**
+     * @OA\Response(
+     *     response=200,
+     *     description="Récupére la liste des téléphones",
+     *     @OA\JsonContent(
+     *     type="array",
+     *     @OA\Items(ref=@Model(type=Phone::class))
+     *      )
+     *)
+     *
+     * @Security(name="Bearer")
      * @Rest\Get(
      *     path = "/api/phones",
      *     name = "app_phone_list"
