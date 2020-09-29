@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -20,9 +21,11 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
 
+
 class UserController extends AbstractFOSRestController
 {
     /**
+     * @Cache(maxage=3600, public=true)
      * @OA\Response(
      *     response=200,
      *     description="Récupére la liste des utilisateurs",
@@ -88,6 +91,7 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
+     * @Cache(maxage=3600, public=true)
      * @OA\Response(
      *     response=200,
      *     description="Récupére le détail d'un utilisateur",

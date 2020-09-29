@@ -13,10 +13,12 @@ use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 
 class PhoneController extends AbstractFOSRestController
 {
     /**
+     * @Cache(maxage=3600, public=true)
      * @OA\Response(
      *     response=200,
      *     description="Récupére les détails d'un téléphone",
@@ -42,6 +44,7 @@ class PhoneController extends AbstractFOSRestController
     }
 
     /**
+     * @Cache(maxage=3600, public=true)
      * @OA\Response(
      *     response=200,
      *     description="Récupére la liste des téléphones",
