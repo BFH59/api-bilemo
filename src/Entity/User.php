@@ -7,11 +7,61 @@ use JMS\Serializer\Annotation as Serializer;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Hateoas\Configuration\Annotation as Hateoas;
+
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Cet email est déjà enregistré", groups={"Create", "Update"})
  * @Serializer\ExclusionPolicy("all")
+ *
+ * @Hateoas\Relation(
+ *     "self",
+ *     href = @Hateoas\Route(
+ *      "app_user_show",
+ *     parameters={"id" = "expr(object.getId())" },
+ *     absolute = true
+ *     )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "list",
+ *     href = @Hateoas\Route(
+ *     "app_user_list",
+ *     absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "create",
+ *     href = @Hateoas\Route(
+ *      "app_user_create",
+ *      absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "update",
+ *     href = @Hateoas\Route(
+ *     "app_user_update",
+ *     parameters={ "id" = "expr(object.getId())"},
+ *     absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "delete",
+ *     href= @Hateoas\Route(
+ *     "app_user_delete",
+ *     parameters={ "id" = "expr(object.getId())"},
+ *     absolute = true
+ *      )
+ * )
+ *
+ * @Hateoas\Relation(
+ *     "client",
+ *     embedded = @Hateoas\Embedded("expr(object.getClient().getName())")
+ * )
  *
  */
 class User
@@ -36,6 +86,7 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
+     *
      *
      */
     private $client;

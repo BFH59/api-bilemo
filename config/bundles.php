@@ -17,4 +17,5 @@ return [
     FOS\RestBundle\FOSRestBundle::class => ['all' => true],
     Lexik\Bundle\JWTAuthenticationBundle\LexikJWTAuthenticationBundle::class => ['all' => true],
     BabDev\PagerfantaBundle\BabDevPagerfantaBundle::class => ['all' => true],
+    Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle::class => ['all' => true],
 ];
