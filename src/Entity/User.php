@@ -58,6 +58,11 @@ use Hateoas\Configuration\Annotation as Hateoas;
  *      )
  * )
  *
+ * @Hateoas\Relation(
+ *     "client",
+ *     embedded = @Hateoas\Embedded("expr(object.getClient().getName())")
+ * )
+ *
  */
 class User
 {
@@ -81,6 +86,7 @@ class User
     /**
      * @ORM\ManyToOne(targetEntity=Client::class, inversedBy="users")
      * @ORM\JoinColumn(nullable=false)
+     *
      *
      */
     private $client;
