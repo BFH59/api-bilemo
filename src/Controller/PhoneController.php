@@ -19,7 +19,7 @@ use OpenApi\Annotations as OA;
 class PhoneController extends AbstractFOSRestController
 {
     /**
-     * @Cache(maxage=3600, public=true)
+     * @Cache(maxage=3600, public=true, vary={"authorization"})
      * @OA\Response(
      *     response=200,
      *     description="Récupére les détails d'un téléphone",
@@ -45,7 +45,7 @@ class PhoneController extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(maxage=3600, public=true)
+     * @Cache(maxage=3600, public=true, vary={"authorization"})
      * @OA\Response(
      *     response=200,
      *     description="Récupére la liste des téléphones",

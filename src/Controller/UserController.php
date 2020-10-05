@@ -25,7 +25,7 @@ use OpenApi\Annotations as OA;
 class UserController extends AbstractFOSRestController
 {
     /**
-     * @Cache(maxage=3600, public=true)
+     * @Cache(maxage=3600, public=true, vary={"authorization"})
      * @OA\Response(
      *     response=200,
      *     description="Récupére la liste des utilisateurs",
@@ -91,7 +91,7 @@ class UserController extends AbstractFOSRestController
     }
 
     /**
-     * @Cache(maxage=3600, public=true)
+     * @Cache(maxage=3600, public=true, vary={"authorization"})
      * @OA\Response(
      *     response=200,
      *     description="Récupére le détail d'un utilisateur",
