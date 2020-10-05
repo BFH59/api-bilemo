@@ -7,13 +7,14 @@ namespace App\Controller;
 use App\Entity\Phone;
 use App\Repository\PhoneRepository;
 use App\Representation\Phones;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Request\ParamFetcherInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use Nelmio\ApiDocBundle\Annotation\Security;
 use OpenApi\Annotations as OA;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
+
 
 class PhoneController extends AbstractFOSRestController
 {
@@ -103,7 +104,6 @@ class PhoneController extends AbstractFOSRestController
             $paramFetcher->get('offset'),
             $paramFetcher->get('page')
         );
-
         return new Phones($pager);
     }
 }
