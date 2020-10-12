@@ -15,6 +15,7 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $clientRepository = static::$container->get(ClientRepository::class);
         $testUser = $clientRepository->findOneByEmail('orange@orange.fr');
+
         $client->request('POST', '/api/login_check', [], [],
             ['CONTENT_TYPE' => 'application/json'],
             json_encode(
@@ -28,7 +29,7 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
         $client->request('GET', '/api/users', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -57,7 +58,7 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
         $client->request('GET', '/api/users/1', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -87,7 +88,7 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 // test with a user from Client FREE, should return 403 forbidden status code because logged in client is Orange
         $client->request('GET', '/api/users/20', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -117,7 +118,7 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 //  User creation linked to logged in client ( orange) should return 201
         $client->request('POST', '/api/users', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -152,9 +153,9 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
-        $client->request('DELETE', '/api/users/95', [], [], [
+        $client->request('DELETE', '/api/users/98', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json'
@@ -181,7 +182,7 @@ class UserControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
         $client->request('DELETE', '/api/users/68', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,

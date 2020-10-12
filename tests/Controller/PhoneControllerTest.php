@@ -27,7 +27,7 @@ class PhoneControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
         $client->request('GET', '/api/phones', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -56,7 +56,7 @@ class PhoneControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 
         $client->request('GET', '/api/phones/127', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
@@ -85,7 +85,7 @@ class PhoneControllerTest extends WebTestCase
         $response = $client->getResponse();
         $token =  json_decode($response->getContent())->token;
 
-        $client->loginUser($testUser);
+        //$client->loginUser($testUser);
 // test with a phone ID that doesn't exist, should return 404 status code
         $client->request('GET', '/api/phones/1', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,

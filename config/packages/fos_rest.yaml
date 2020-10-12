@@ -14,6 +14,8 @@ fos_rest:
       validation_errors_argument: violations
     exception:
       enabled: true
+      messages:
+        'Symfony\Component\HttpKernel\Exception\HttpException': true
     format_listener:
       rules:
         - { path: ^/, prefer_extension: true, fallback_format: 'json', priorities: [ 'json', 'html' ] }
