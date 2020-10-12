@@ -155,7 +155,7 @@ class UserControllerTest extends WebTestCase
 
         //$client->loginUser($testUser);
 
-        $client->request('DELETE', '/api/users/98', [], [], [
+        $client->request('DELETE', '/api/users/99', [], [], [
             'HTTP_AUTHORIZATION' => 'Bearer '.$token,
             'CONTENT_TYPE' => 'application/json',
             'HTTP_ACCEPT' => 'application/json'
