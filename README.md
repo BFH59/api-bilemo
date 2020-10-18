@@ -57,6 +57,8 @@ php bin/console doctrine:fixtures:load
 
 ===================================================================================================
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0cac080a392f4fd0b8a05d4f75f123cd)](https://app.codacy.com/gh/BFH59/api-bilemo?utm_source=github.com&utm_medium=referral&utm_content=BFH59/api-bilemo&utm_campaign=Badge_Grade)
+
 Documentation de l'API accessible via l'adresse : http://127.0.0.1:8888/api/doc (changer le domaine en fonction de votre hébergement distant/local)
 
 URL à contacter pour obtenir un token et effectuer des appels à l'API :
